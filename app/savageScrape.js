@@ -45,8 +45,12 @@ function getFeedData(callback) {
 			author: {
 				name:       author
 			},
-			category:		"News"
+			
 		});
+		
+		feed.category('News');
+		feed.category('Michael Savage');
+		feed.category('Savage');
 		
 		articles.each(function(index, article) {
 			
