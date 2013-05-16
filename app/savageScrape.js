@@ -1,16 +1,91 @@
 var Request = require('request'),
 Cheerio = require('cheerio'),
 url = 'http://www.michaelsavage.wnd.com/',
-Feed = require('feed');
+Feed = require('feed'),
+express = require('express'),
+app = express(),
+returnData = "test",
+feedResponse;
 
-Request(url, function(error, response, body) {
-	if (error)
-		throw error;
-	$ = Cheerio.load(body);
+app.get('/savageFeed', function(req, res){
+
+	getFeedData(function(data){
 	
-	var articles = $('article');
+		res.setHeader('Content-Type', 'application/rss+xml');
+		res.setHeader('Content-Length', data.length+2);
+		res.end(data);
 	
-	articles.find('a').each(function(index, link) {
-		console.log($(this).attr('href'));
-	});
+	});	
+	
 });
+
+function getFeedData(callback) {
+
+	
+	Request(url, function(error, response, body) {
+		
+		if (error)
+			returnData = error;
+			
+		$ = Cheerio.load(body);
+		
+		var articles = $('article');
+		var iconSource = $('link[rel="apple-touch-icon"]').attr('href');
+		var description = $('meta[name="description"]').attr('content');
+		var author = $('meta[name="author"]').attr('content');
+		var copyright = $('meta[name="Copyright"]').attr('content');
+		
+		var feed = new Feed({
+			title:          description,
+			description:    description,
+			link:           'http://www.michaelsavage.wnd.com/',
+			image:          iconSource,
+			copyright:      copyright,
+
+			author: {
+				name:       author
+			},
+			category:		"News"
+		});
+		
+		articles.each(function(index, article) {
+			
+			var articleHeader = $(this).find('h2');		
+			
+			if(articleHeader) {
+				
+				var articleTitle = articleHeader.children().first().text();
+				var articleLink = articleHeader.children().first().attr('href');
+				var imageSource = $(this).find('img').attr('src');
+				var articleDescription = $(this).find('p').first().text();
+				
+				if(articleDescription && articleLink && imageSource && articleDescription) {
+			
+					feed.item({
+					
+						title:			articleTitle || '',
+						link:			articleLink || '',
+						description: 	articleDescription || '',
+						image: 			imageSource || '',
+						date:			new Date()
+					
+					});
+			
+					//console.log(articleTitle);
+					//console.log(articleDescription);
+					//console.log(articleLink);
+					//console.log(imageSource);
+					//console.log('---------------------------------------\r\n');
+			
+				}
+				
+			}
+		});
+		
+		callback(feed.render());
+	});
+}
+
+
+
+app.listen(3000);
