@@ -11,8 +11,7 @@ app.get('/savage/frontpage', function(req, res){
 
 	getFeedData(function(data){
 	
-		res.setHeader('Content-Type', 'application/rss+xml');
-		res.setHeader('Content-Length', data.length+2);
+		res.setHeader('Content-Type', 'text/xml');
 		res.end(data);
 	
 	});	
