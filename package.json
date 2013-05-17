@@ -1,0 +1,10 @@
+{
+  "name" : "savage-scraper",
+  "description" : "HTML scraper of www.michaelsavage.wnd.com then produces an rss feed.",
+  "keywords" : ["news", "michael savage", "rss"],
+  "author" : "sean biefeld",
+  "contributors" : [],
+  "dependencies" : [],
+  "main" : "app/savageScrape.js",
+  "version" : "0.1"
+}
