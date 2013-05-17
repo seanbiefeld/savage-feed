@@ -7,6 +7,8 @@ app = express(),
 returnData = "test",
 feedResponse;
 
+app.use(express.compress());
+
 app.get('/frontpage', function(req, res){
 
 	getFeedData(function(data){
