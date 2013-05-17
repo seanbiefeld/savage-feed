@@ -1,10 +1,21 @@
 {
-  "name" : "savage-scraper",
-  "description" : "HTML scraper of www.michaelsavage.wnd.com then produces an rss feed.",
-  "keywords" : ["news", "michael savage", "rss"],
-  "author" : "sean biefeld",
-  "contributors" : [],
-  "dependencies" : [],
-  "main" : "app/savageScrape.js",
-  "version" : "0.1"
+  "name": "savage-scraper",
+  "description": "HTML scraper of www.michaelsavage.wnd.com then produces an rss feed.",
+  "keywords": [
+    "news",
+    "michael savage",
+    "rss"
+  ],
+  "author": "sean biefeld",
+  "contributors": [],
+  "dependencies": [],
+  "main": "savageScrape.js",
+  "version": "0.0.1",
+  "subdomain": "savage-feed",
+  "scripts": {
+    "start": "node savageScrape.js"
+  },
+  "engines": {
+    "node": "0.8.x"
+  }
 }
