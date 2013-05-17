@@ -8,9 +8,14 @@
   ],
   "author": "sean biefeld",
   "contributors": [],
-  "dependencies": [],
+  "dependencies": {
+    "express": "3.2.4",
+    "request": "2.21.0",
+    "cheerio": "0.11.0",
+    "feed": "0.2.2"
+  },
   "main": "savageScrape.js",
-  "version": "0.0.1",
+  "version": "0.0.1-4",
   "subdomain": "savage-feed",
   "scripts": {
     "start": "node savageScrape.js"

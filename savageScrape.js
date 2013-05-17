@@ -7,7 +7,7 @@ app = express(),
 returnData = "test",
 feedResponse;
 
-app.get('/savage/frontpage', function(req, res){
+app.get('/frontpage', function(req, res){
 
 	getFeedData(function(data){
 	
